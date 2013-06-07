@@ -13,8 +13,17 @@
 
 (function($)
 { 
-    $.fn.countdown=function()
+    $.fn.countdown = function(fct)
     {
+    	var settings = {
+            callback: function(){}
+        };
+
+        if(fct)
+        {
+        	settings.callback = fct;
+        }
+
     	var instance = [];
        	return this.each(function(i,el)
        	{
@@ -34,6 +43,7 @@
 	       		if(left < 0)
 	       		{
 	       			window.clearInterval(instance[i]);
+	       			settings.callback();
 	       			left = 0;
 	       		}
 

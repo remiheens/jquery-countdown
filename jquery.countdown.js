@@ -17,6 +17,7 @@
     {
     	var settings = {
     		debug : true,
+    		delay : 1000,
             callback: function(){
             	if(settings.debug === true)
             	{
@@ -62,7 +63,7 @@
 			}
 
 			timer();
-       		instance[i] = setInterval(timer,1000);
+       		instance[i] = setInterval(timer,settings.delay);
 
        	});                         
     };

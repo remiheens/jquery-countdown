@@ -16,7 +16,13 @@
     $.fn.countdown = function(fct)
     {
     	var settings = {
-            callback: function(){}
+    		debug : true,
+            callback: function(){
+            	if(settings.debug === true)
+            	{
+            		console.log('boum');
+            	}
+            }
         };
 
         if(fct)

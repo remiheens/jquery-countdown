@@ -4,10 +4,21 @@
 	<script type="text/javascript" src="./jquery.countdown.js"></script>
 </head>
 <body>
-	<span class="countdown" data-limit="2013-06-08 00:33:20">00:00:00</span>
+	<span class="countdown" data-limit="2013-06-08 12:56:00">00:00:00</span>
 	<script>
 	jQuery(document).ready(function($){
-		$('.countdown').countdown();
+		$('.countdown').countdown({
+			delay : 1000,
+			pattern : '{0}:{1}:{2}',
+			events : {
+				finish: function(){
+					console.log('finish');
+				},
+				progress: function (){
+					console.log('progress');
+				}
+			}
+		});
 	});
 	</script>
 </body>

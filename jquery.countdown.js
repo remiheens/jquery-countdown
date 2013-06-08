@@ -18,13 +18,20 @@
        var settings = $.extend({
           debug : true,
           delay : 1000,
+          millisecond : false,
           pattern : '{0}-{1}-{2}',
           events: {
             finish: function(){
-
+              if(settings.debug === true)
+              {
+                console.log('fire finish event');
+              }
             },
             progress : function(){
-
+              if(settings.debug === true)
+              {
+                console.log('fire progress event');
+              }
             }
           } 
         },options);
@@ -48,20 +55,28 @@
 
               if(left-1 < 0)
               {
-                 window.clearInterval(instance[i]);
                  settings.events.finish();
                  left = 0;
+                 $(el).html(settings.pattern.format("00","00","00"));
+
+                 window.clearInterval(instance[i]);
                  return;
               }
 
               var hours = parseInt( left / 3600 ) % 24;
               var minutes = parseInt( left / 60 ) % 60;
-              var seconds = parseInt( left % 60 );
-
+              var seconds;
+              if(settings.millisecond === true)
+              {
+                seconds = Math.round( (left % 60 )*1000)/1000;
+              }
+              else
+              {
+                seconds = parseInt(left % 60);
+              }
 
               $(el).html(settings.pattern.format((hours < 10 ? "0" + hours : hours),(minutes < 10 ? "0" + minutes : minutes),(seconds  < 10 ? "0" + seconds : seconds)));
 
-              // fire progress event
               settings.events.progress();
            }
 

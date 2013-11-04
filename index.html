@@ -35,6 +35,31 @@
 <a name="jquery-countdown" class="anchor" href="#jquery-countdown"><span class="octicon octicon-link"></span></a>jquery-countdown</h1>
 
 <p>Countdown plugin for jQuery</p>
+<p>
+  <code>
+    $('#countown').countdown({
+      debug : true,
+      delay : 1000,
+      millisecond : false,
+      pattern : '{0}-{1}-{2}',
+      events: {
+        finish: function(){
+          if(settings.debug === true)
+          {
+            console.log('fire finish event');
+          }
+        },
+        progress : function(){
+          if(settings.debug === true)
+          {
+            console.log('fire progress event');
+          }
+        }
+      } 
+    });
+  </code>
+</p>
+
         </section>
 
         <footer>

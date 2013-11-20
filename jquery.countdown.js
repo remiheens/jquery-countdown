@@ -20,7 +20,7 @@
           delay : 1000,
           millisecond : false,
           pattern : '{0}-{1}-{2}',
-          with_date : false,
+          with_day : false,
           events: {
             finish: function(){
               if(settings.debug === true)

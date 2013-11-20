@@ -20,6 +20,7 @@
           delay : 1000,
           millisecond : false,
           pattern : '{0}-{1}-{2}',
+          with_date : false,
           events: {
             finish: function(){
               if(settings.debug === true)
@@ -27,7 +28,7 @@
                 console.log('fire finish event');
               }
             },
-            progress : function(){
+            progress : function(left){
               if(settings.debug === true)
               {
                 console.log('fire progress event');
@@ -62,7 +63,7 @@
                  window.clearInterval(instance[i]);
                  return;
               }
-
+              var days = parseInt( left / 3600 / 24 ) ;
               var hours = parseInt( left / 3600 ) % 24;
               var minutes = parseInt( left / 60 ) % 60;
               var seconds;
@@ -75,9 +76,16 @@
                 seconds = parseInt(left % 60);
               }
 
-              $(el).html(settings.pattern.format((hours < 10 ? "0" + hours : hours),(minutes < 10 ? "0" + minutes : minutes),(seconds  < 10 ? "0" + seconds : seconds)));
+              if(settings.with_day === true)
+              {
+                $(el).html(settings.pattern.format((days < 10 ? + days : days),(hours < 10 ? "0" + hours : hours),(minutes < 10 ? "0" + minutes : minutes),(seconds  < 10 ? "0" + seconds : seconds)));
+              }
+              else
+              {
+                $(el).html(settings.pattern.format((hours < 10 ? "0" + hours : hours),(minutes < 10 ? "0" + minutes : minutes),(seconds  < 10 ? "0" + seconds : seconds)));
+              }
 
-              settings.events.progress();
+              settings.events.progress(parseInt(left));
            }
 
            timer();

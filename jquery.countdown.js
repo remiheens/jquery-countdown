@@ -56,12 +56,19 @@
 
               if(left-1 < 0)
               {
-                 settings.events.finish();
-                 left = 0;
-                 $(el).html(settings.pattern.format("00","00","00"));
+                settings.events.finish();
+                left = 0;
+                if(settings.with_day === true)
+                {
+                  $(el).html(settings.pattern.format("00","00","00","00"));
+                }
+                else
+                {
+                  $(el).html(settings.pattern.format("00","00","00"));
+                }
 
-                 window.clearInterval(instance[i]);
-                 return;
+                window.clearInterval(instance[i]);
+                return;
               }
               var days = parseInt( left / 3600 / 24 ) ;
               var hours = parseInt( left / 3600 ) % 24;
